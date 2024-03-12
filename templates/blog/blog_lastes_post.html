@@ -1,0 +1,9 @@
+{%load static%}
+<div class="widget-content">
+    <h4>Recent Posts</h4>
+    <ul class="thumb-post ">
+        {% for post in posts %}
+        <li ><a href="{% url 'blog:single' pid=post.id %}"><img src="{{post.image.url}}" alt="post" ></a><a href="{% url 'blog:single' pid=post.id %}" >{{post.title|truncatechars:30}}</a></li>
+        {%endfor%}
+    </ul>
+</div>
