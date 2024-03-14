@@ -42,11 +42,24 @@
                 <div class="d-flex menu-wrap align-items-center">
                     <div id="mainmenu" class="mainmenu">
                         <ul class="nav">
+                            <li class="bg-secondary"><a href="#">Profile</a>
+                                <ul>
+                                    {% if request.user.is_authenticated %}
+                                    <li><a href="#">{{request.user.username}}</a></li>
+                                    <li><a href="{% url 'accounts:logout'%}">Logout</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'accounts:login'%}">Login</a></li>
+                                    <li><a href="{% url 'accounts:signup'%}">Signup</a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </li>
                             <li><a data-scroll class="nav-link active" href="{% url 'website:index' %}">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="{% url 'website:about' %}">About</a></li>
                             <li><a href="{% url 'website:services' %}">Services</a></li>
                             <li><a href="{% url 'blog:index' %}">Blog</a></li>
                             <li><a href="{% url 'website:contact' %}">Contact</a></li>
+
                         </ul>
                     </div>
                     <div class="header-btn">
