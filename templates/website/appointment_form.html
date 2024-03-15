@@ -1,0 +1,58 @@
+<form action="{% url 'website:appointment' %}" method="post" 
+class="form-horizontal appointment_form">
+{%csrf_token%}	
+<input type="hidden" name="email" value={{request.user.email}}>
+<div class="book_content">
+    <h2>Make an appointment</h2>
+    <p>Barber is a person whose occupation is mainly to cut dress groom <br>style and shave
+        men's and boys hair.</p>
+</div>
+<div class="form-group row">
+    <div class="col-md-6 padding-10">
+        <input type="text" id="app_name" name="name" class="form-control" placeholder="Name" value="{{user.get_full_name}}"  required>
+    </div>
+    <div class="col-md-6 padding-10">
+        <input type="text" id="app_phone" name="phoneNumber" class="form-control"
+            placeholder="Your Phone No" required>
+    </div>
+</div>
+<div class="form-group row">
+
+    <div class="col-md-6 padding-10">
+        <input type="date" id="app_free_time" name="date" class="form-control"
+            placeholder="Your Free Time" required>
+    </div>
+    <div class="col-md-6 padding-10">
+        <input type="time" id="app_free_time" name="time" class="form-control"
+            placeholder="Your Free Time" required>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-md-6 padding-10">
+        <select class="form-control" id="app_services" name="service">
+            <option>Services</option>
+            <option>Hair Styling</option>
+            <option>Shaving</option>
+            <option>Face Mask</option>
+            <option>Hair Wash</option>
+            <option>Beard Triming</option>
+        </select>
+    </div>
+    <div class="col-md-6 padding-10">
+        <select class="form-control" id="app_barbers" name="barber">
+            <option>Choose Barbers</option>
+            <option>Michel Brown</option>
+            <option>Jonathan Smith</option>
+            <option>Jack Tosan</option>
+            <option>Martin Lane</option>
+        </select>
+    </div>
+</div>
+{% if request.user.is_authenticated %}
+<button class="default_btn" type="submit">Make Appointment</button>
+{%else%}
+<div class="header-btn d-flex justify-content-center mt-4 ">
+    <a href="{% url 'website:appointment' %}" class="menu-btn">Login or Signup</a>
+</div>
+{%endif%}
+</form>

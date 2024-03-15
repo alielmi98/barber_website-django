@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Contact,NewsLetter
-from .forms import ContactForm,NewsLetterForm
+from .forms import ContactForm,NewsLetterForm,AppointmentForm
 from django.contrib import messages
 import sweetify
 
@@ -30,7 +30,19 @@ def contact_view(request):
     return render(request,"website/contact.html",{'form': form})
 
 def appointment_view(request):
-    return render(request,"website/appointment.html")
+    if  request.user.is_authenticated:
+        form=AppointmentForm(request.POST)
+    
+        if request.method=="POST":
+            if form.is_valid():
+                form.save()
+                sweetify.success(request, "Your Appointment request has been registered")
+            else:
+                sweetify.error(request, "Your request was not sent")
+        return render(request,"website/appointment.html",{'form': form})
+    else:
+        sweetify.info(request, "please login or signup first")
+        return redirect('/accounts/login/')
 
 
 def newsletter_view(request):

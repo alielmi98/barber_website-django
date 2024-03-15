@@ -1,0 +1,28 @@
+
+{%load static%}
+
+<section class="blog-section bd-bottom padding">
+    <div class="container">
+        <div class="section-heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
+            <h3>From Blog</h3>
+            <h2>A Good Newspaper Is A <br> Nation Talking To Itself</h2>
+        </div>
+        <div class="row blog-wrap">
+            {%for post in posts%}
+            <div class="col-lg-4 col-md-6 sm-padding wow fadeInUp" data-wow-delay="200ms">
+                <div class="blog-item">
+                    <div class="blog-thumb">
+                        <img src="{{post.image.url}}" alt="post" style="height: 300px;">
+                        <span class="category"><a href="{% url 'blog:single' pid=post.id %}">{{post.counted_views}} views</a></span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">{{post.title}}</a></h3>
+                        <p>{{ post.content|truncatewords:40|safe }}</p>
+                        <a href="{% url 'blog:single' pid=post.id %}" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</section>
